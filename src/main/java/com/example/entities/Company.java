@@ -2,6 +2,7 @@ package com.example.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.engine.jdbc.env.internal.LobTypes;
 
 @Entity
 @Getter
@@ -19,8 +20,7 @@ public class Company {
 
     private String direccion;
 
-    @Lob
-    private byte[] imagen;
+    private String imagen;
 
     public Company(String nombre, String direccion) {
         this.nombre = nombre;

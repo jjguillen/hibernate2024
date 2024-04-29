@@ -79,11 +79,4 @@ public class CompanyRepository {
         return sesion.createQuery("Select e From Company e").list();
     }
 
-    public void saveImage(byte[] imagen, Long id) {
-        sesion.beginTransaction();
-        Company cp = this.findById(id);
-        cp.setImagen(imagen);
-        sesion.merge(cp);
-        sesion.getTransaction().commit();
-    }
 }

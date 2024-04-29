@@ -6,13 +6,15 @@ import com.example.repositories.CompanyRepository;
 import com.example.repositories.EmployeeRepository;
 import jakarta.transaction.Transactional;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.*;
 import java.net.URL;
-import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class App {
 
@@ -25,9 +27,9 @@ public class App {
         Employee emp1 = new Employee("María","Díaz",25000.0, "mariad@gmail.com");
         er.insert(emp1);
 
-        er.update(new Employee(9L, "María", "Jiménez", 25000.0,
-                "mariaj@gmail.com"));
-        System.out.println(er.findById(9L));
+        //er.update(new Employee(9L, "María", "Jiménez", 25000.0,
+        //        "mariaj@gmail.com"));
+        //System.out.println(er.findById(9L));
 
         //er.delete(er.findById(10L));
 
@@ -39,14 +41,24 @@ public class App {
         // -----------------------------------------------------
 
         CompanyRepository cr = new CompanyRepository();
-        Company cp1 = new Company("Cosentino S.A.", "Cantoria");
+        Company cp1 = new Company("Dune S.A.", "Vera");
         cr.insert(cp1);
 
-        /*
+
         //Leer imagen de url
-        URL url = new URL("https://pm1.aminoapps.com/6313/026f7fff60fafb9b7eebd6f0b4f1a5b6a73d3175_hq.jpg");
+        URL url = new URL("https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2024/03/04/dune-parte-dos.jpeg");
         ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
-        */
+
+        //Escribir la información en un fichero
+        String nombreFichero = "./src/main/resources/imagenes/company-" + cp1.getId() + ".jpg";
+        InputStream in = url.openStream();
+        Files.copy(in, Paths.get(nombreFichero), StandardCopyOption.REPLACE_EXISTING);
+
+        //Meter la url de la imagen en el objeto Company
+        cp1.setImagen(nombreFichero);
+        cr.update(cp1);
+
+        cr.closeSession();
 
     }
 }
