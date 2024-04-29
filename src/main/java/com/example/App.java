@@ -44,7 +44,6 @@ public class App {
         Company cp1 = new Company("Dune S.A.", "Vera");
         cr.insert(cp1);
 
-
         //Leer imagen de url y escribirla en fichero
         URL url = new URL("https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2024/03/04/dune-parte-dos.jpeg");
         String nombreFichero = "./src/main/resources/imagenes/company-" + cp1.getId() + ".jpg";

@@ -72,13 +72,8 @@ public class EmployeeRepository {
      * @return List con todos los Employee en la base de datos
      */
     public List<Employee> findAll() {
-        /*
-        String consulta = "Select e From Employee e";
-        var query = sesion.createQuery(consulta);
-        return query.list();
-        */
 
-        return sesion.createQuery("Select e From Employee e").list();
+        return sesion.createQuery("Select e From Employee e", Employee.class).getResultList();
     }
 
 }

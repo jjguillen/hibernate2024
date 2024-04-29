@@ -76,7 +76,7 @@ public class CompanyRepository {
         return query.list();
         */
 
-        return sesion.createQuery("Select e From Company e").list();
+        return sesion.createQuery("Select e From Company e", Company.class).getResultList();
     }
 
 }
