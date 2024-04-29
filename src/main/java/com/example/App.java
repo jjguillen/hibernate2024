@@ -45,11 +45,8 @@ public class App {
         cr.insert(cp1);
 
 
-        //Leer imagen de url
+        //Leer imagen de url y escribirla en fichero
         URL url = new URL("https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2024/03/04/dune-parte-dos.jpeg");
-        ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
-
-        //Escribir la información en un fichero
         String nombreFichero = "./src/main/resources/imagenes/company-" + cp1.getId() + ".jpg";
         InputStream in = url.openStream();
         Files.copy(in, Paths.get(nombreFichero), StandardCopyOption.REPLACE_EXISTING);
