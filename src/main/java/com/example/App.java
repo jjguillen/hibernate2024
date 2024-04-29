@@ -1,7 +1,9 @@
 package com.example;
 
+import com.example.entities.Address;
 import com.example.entities.Company;
 import com.example.entities.Employee;
+import com.example.repositories.AddressRepository;
 import com.example.repositories.CompanyRepository;
 import com.example.repositories.EmployeeRepository;
 import jakarta.transaction.Transactional;
@@ -35,11 +37,11 @@ public class App {
 
         er.findAll().forEach(System.out::println);
 
-        //Close repository
-        er.closeSession();
+
 
         // -----------------------------------------------------
 
+        /*
         CompanyRepository cr = new CompanyRepository();
         Company cp1 = new Company("Dune S.A.", "Vera");
         cr.insert(cp1);
@@ -55,6 +57,21 @@ public class App {
         cr.update(cp1);
 
         cr.closeSession();
+        */
+
+        AddressRepository ar = new AddressRepository();
+        Address a1 = new Address("Mi calle", "Cuevas", "04633");
+        //ar.insert(a1);
+
+        Employee en = er.findById(3L);
+        en.setAddress(ar.findById(1L));
+        er.update(en);
+
+        Employee en3 = er.findById(3L);
+        System.out.println(en3);
+
+        ar.closeSession();
+        er.closeSession();
 
     }
 }

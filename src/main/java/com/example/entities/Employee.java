@@ -1,9 +1,6 @@
 package com.example.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -24,6 +21,12 @@ public class Employee {
     private Double salary;
 
     private String email;
+
+    @OneToOne
+    private Address address;
+
+    @ManyToOne
+    private Company company;
 
     public Employee(String name, String lastName, Double salary, String email) {
         this.name = name;
