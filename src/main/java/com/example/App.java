@@ -70,6 +70,25 @@ public class App {
         Employee en3 = er.findById(3L);
         System.out.println(en3);
 
+
+        CompanyRepository cr = new CompanyRepository();
+
+        /*
+        Company c1 = new Company("Garciden8","Vera");
+        cr.insert(c1);
+
+        Employee en3_2 = er.findById(3L);
+        en3_2.setCompany(c1);
+        er.update(en3_2);
+
+        Employee en3_3 = er.findById(4L);
+        en3_3.setCompany(c1);
+        er.update(en3_3);
+        */
+
+        cr.findById(10L).getEmployees().forEach(System.out::println);
+
+        cr.closeSession();
         ar.closeSession();
         er.closeSession();
 

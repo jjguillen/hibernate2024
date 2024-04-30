@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.engine.jdbc.env.internal.LobTypes;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -21,6 +24,9 @@ public class Company {
     private String direccion;
 
     private String imagen;
+
+    @OneToMany(mappedBy = "company")
+    private Set<Employee> employees = new HashSet<>();
 
     public Company(String nombre, String direccion) {
         this.nombre = nombre;

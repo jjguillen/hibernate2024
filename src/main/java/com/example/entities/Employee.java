@@ -8,7 +8,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +24,7 @@ public class Employee {
     @OneToOne
     private Address address;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Company company;
 
     public Employee(String name, String lastName, Double salary, String email) {
@@ -33,5 +32,17 @@ public class Employee {
         this.lastName = lastName;
         this.salary = salary;
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", salary=" + salary +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                '}';
     }
 }
